@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Weather App</title>
-
 </head>
+
 
 <header>
     <h1 id="center-me">Welcome to the Weather App</h1>
@@ -17,18 +17,36 @@
 </header>
 <hr>
 
+
 <section id="city-search">
     <h2 id="center-me">Enter the name of a city below:</h2>
     <label for="city-input">City:</label>
     <input type="text" id="city-input" placeholder="Enter city name">
     <button id="search-button">Search</button>
-
 </section>
 
-<body>
 
-    <p id="center-me"></p>
-</body>
+<div id="results-box" class="hidden">
+    <h2 id="city-name">Placeholder</h2>
+
+    <div id="results-row">
+        <div class="results-info" id="time-box">
+            <p id="time">Placehodler</p>
+        </div>
+
+        <div class="results-info" id="temp-box">
+            <p id="temperature">Placehodler</p>
+        </div>
+
+        <div class="results-info" id="cond-box">
+            <p id="condition">Placehodler</p>
+        </div>
+    </div>
+
+    <div id="temp-image-box">
+        <img id="temp-image" src="" alt="Weather Image Placeholder">
+    </div>
+</div>
 
 
 </html>
