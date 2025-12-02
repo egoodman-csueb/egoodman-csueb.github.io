@@ -1,0 +1,18 @@
+#center-me {
+    text-align: center;
+}
+
+#city-search {
+    text-align: center;
+}
+
+#city-input {
+    text-align: center;
+}
+
+header {
+    background: linear-gradient(to bottom right, #87CEEB, #0F0A5F);
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
