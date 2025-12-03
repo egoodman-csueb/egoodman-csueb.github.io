@@ -20,26 +20,28 @@ const tempImage = document.getElementById('temp-image');
 const apiKey = "693d39a9738c9be1289b108ff8308900";
 const baseURL = "https://api.openweathermap.org/data/2.5/weather";
 
+
 searchButton.addEventListener('click', async () => {
     const city = cityInput.value.trim();
 
-    if (city === "") {
+    if (city === "") { //if user hasn't entered anything
         alert("Please enter a city name.");
         return;
     }
 
-    const url = `${baseURL}?q=${encodeURIComponent(city)}&appid=${apiKey}&units=imperial`;
+    const url = `${baseURL}?q=${encodeURIComponent(city)}&appid=${apiKey}&units=imperial`; //for the weather api
     console.log('Requesting weather:', url);
 
-    let cityNameFromAPI;
+    let cityNameFromAPI; //for displaying the correct city name from the API
 
-    try {
+    try { //fetch weather data
         const response = await fetch(url);
-        if (!response.ok) {
+        if (!response.ok) { //if city not found
             alert("City not found, try again.");
             return;
         }
 
+        //if city found, get data
         const data = await response.json();
         const temp = data.main.temp;
         const description = data.weather[0].description;
@@ -62,53 +64,57 @@ searchButton.addEventListener('click', async () => {
         feels.innerHTML = "Feels like:<br>" + feelsLikeResponse + " °F";
         windSpeed.innerHTML = "Wind Speed:<br>" + windResponse + " mph";
 
-
-        resultsBox.classList.remove("hidden");
+        resultsBox.classList.remove("hidden"); //show results and image
         tempImageBox.classList.remove("hidden");
 
-        // Set a basic placeholder while we load Wikipedia
-        //tempImage.src = "placeholder.jpg";
-
         console.log("Weather API data:", data);
+
     } catch (error) {
         console.error(error);
         alert('An error occurred while fetching the weather data. Please try again later.');
         return;
     }
 
-    // Use cityNameFromAPI if we got it; fall back to input city
-    const wikiTitle = cityNameFromAPI || city;
-    const wikiUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(
-        wikiTitle
-    )}&prop=pageimages&piprop=thumbnail&pithumbsize=400&format=json&origin=*`;
+    //Fetch city image from Wikipedia
+    const wikiUrl = `https://en.wikipedia.org/w/api.php?action=query` +
+        `&titles=${encodeURIComponent(city)}` +
+        `&prop=pageimages&piprop=thumbnail&pithumbsize=400` +
+        `&format=json&origin=*`;
+
 
     console.log('Requesting Wikipedia:', wikiUrl);
 
-    try {
+    try { //fetch wiki data
         const wikiResponse = await fetch(wikiUrl);
         const wikiData = await wikiResponse.json();
         console.log('Wiki data:', wikiData);
 
         let cityImageUrl = null;
 
-        if (wikiData.query && wikiData.query.pages) {
+        if (wikiData.query && wikiData.query.pages) { //get the page data
             const pages = wikiData.query.pages;
             const pageId = Object.keys(pages)[0];
             const page = pages[pageId];
 
-            if (page && page.thumbnail && page.thumbnail.source) {
+            if (page && page.thumbnail && page.thumbnail.source) { //get the image url
                 cityImageUrl = page.thumbnail.source;
             }
         }
 
-        if (cityImageUrl) {
+        if (cityImageUrl) { //if image found, display it
             tempImage.src = cityImageUrl;
             tempImage.style.display = "block";
+            tempImageBox.classList.remove("hidden");
         } else {
+            tempImage.src = ""; //clear image if not found
             console.log("No city image found on Wikipedia for", wikiTitle);
             tempImage.style.display = "none";
+            tempImageBox.classList.add("hidden");
         }
     } catch (wikiError) {
+        tempImage.src = "";
         console.error("Wiki fetch error:", wikiError);
+        tempImage.style.display = "none";
+        tempImageBox.classList.add("hidden");
     }
 });
