@@ -32,7 +32,6 @@ header {
     color: black;
 }
 
-
 body {
     min-height: 100vh;
     margin: 0;
@@ -53,6 +52,13 @@ body {
 }
 
 #results-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#results-row2 {
     display: flex;
     justify-content: space-between;
     gap: 10px;

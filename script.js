@@ -12,6 +12,9 @@ const cityName = document.getElementById('city-name');
 const time = document.getElementById('time');
 const temperature = document.getElementById('temperature');
 const condition = document.getElementById('condition');
+const humidity = document.getElementById('humidity');
+const feels = document.getElementById('feels');
+const windSpeed = document.getElementById('wind-speed');
 
 const tempImage = document.getElementById('temp-image');
 const apiKey = "693d39a9738c9be1289b108ff8308900";
@@ -42,6 +45,9 @@ searchButton.addEventListener('click', async () => {
         const description = data.weather[0].description;
         const timestamp = data.dt;
         cityNameFromAPI = data.name;
+        const humidityResponse = data.main.humidity;
+        const feelsLikeResponse = data.main.feels_like;
+        const windResponse = data.wind.speed;
 
         const timeString = new Date(timestamp * 1000).toLocaleTimeString('en-US', {
             hour: "numeric",
@@ -52,6 +58,10 @@ searchButton.addEventListener('click', async () => {
         temperature.textContent = temp + " °F";
         condition.textContent = description.charAt(0).toUpperCase() + description.slice(1);
         time.textContent = timeString;
+        humidity.innerHTML = "Humidity:<br>" + humidityResponse + " %";
+        feels.innerHTML = "Feels like:<br>" + feelsLikeResponse + " °F";
+        windSpeed.innerHTML = "Wind Speed:<br>" + windResponse + " mph";
+
 
         resultsBox.classList.remove("hidden");
         tempImageBox.classList.remove("hidden");
