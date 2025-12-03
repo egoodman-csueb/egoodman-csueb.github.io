@@ -14,11 +14,28 @@
     display: none;
 }
 
+.title {
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+}
+
 header {
-    background: linear-gradient(to bottom right, #87CEEB, #0F0A5F);
+
+    background-image: url("clouds background 2.jpg");
+    min-height: 150px;
     padding: 20px;
     text-align: center;
-    color: white;
+    color: black;
+}
+
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #87CEEB, #00073D);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #results-box {
@@ -43,8 +60,9 @@ header {
     flex: 1;
     padding: 10px;
     border-radius: 8px;
-    background: #f9f9f9;
+    background: #04d19dbc;
     text-align: center;
+    border: 2px solid rgb(0, 0, 0);
 }
 
 #temp-image-box {
