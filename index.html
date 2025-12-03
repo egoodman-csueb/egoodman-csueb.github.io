@@ -16,15 +16,19 @@
     <hr>
 
     <section id="city-search">
-        <h2 id="center-me">Enter the name of a city below:</h2>
+        <h2 id="center-me">Enter the name of a city and state below:</h2>
         <label for="city-input">City:</label>
-        <input type="text" id="city-input" placeholder="Enter city name">
+        <input type="text" id="city-input" placeholder="Enter city and state name">
         <button id="search-button">Search</button>
     </section>
 
 
     <div id="results-box" class="hidden">
         <h2 id="city-name">Placeholder</h2>
+
+        <div id="temp-image-box">
+            <img id="temp-image" src="" alt="City Image">
+        </div>
 
         <div id="results-row">
             <div class="results-info" id="time-box">
@@ -40,9 +44,6 @@
             </div>
         </div>
 
-        <div id="temp-image-box">
-            <img id="temp-image" src="" alt="Weather Image Placeholder">
-        </div>
     </div>
 
     <script src="script.js"></script>
